@@ -93,7 +93,7 @@ function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
       <h3 className="credit-headline">CREDITCARD INFO</h3>
       <fieldset id="creditcard-info" className="creditcard-info">
         <label htmlFor="cardholder" className="cardholder">
-          Cardholder fullname{" "}
+          Cardholder Fullname{" "}
           <input
             type="text"
             name="cardholder"

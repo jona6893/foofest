@@ -1,6 +1,27 @@
-function Optionals({ ticket, addToTicket }) {
+import { useEffect, useState } from "react";
+
+function Optionals({ ticket, addToTicket, step }) {
+
+const [cghClass, setCghClass] = useState("nextSlide");
+
+useEffect(() => {
+  switch (step) {
+
+    case 3:
+      setCghClass("nextSlide");
+      break;
+    case 4:
+      setCghClass("");
+      break;
+    case 5:
+      setCghClass("sendToback3");
+      break;
+  }
+}, [step]);
+
+
   return (
-    <>
+    <div className={`optionalsComp ${cghClass}`}>
       <h3>CAMPING OPTIONALS</h3>
       <div className="optionals-wrapper">
         <fieldset className="optionals">
@@ -13,14 +34,17 @@ function Optionals({ ticket, addToTicket }) {
             type="checkbox"
             name="green-camping"
             id="green-camping"
-            onChange={(evt) => addToTicket("greenCamping", Number(evt.target.value))}
+            onChange={(evt) =>
+              addToTicket("greenCamping", Number(evt.target.value))
+            }
           />
           <span className="checkmark"></span>
         </fieldset>
         <p>Get the crew to set up your tents</p>
         <fieldset className="optionals">
           <label htmlFor="two-person" className="two-camp">
-            <span>{ticket.r + ticket.v} person camp</span> <span>{(ticket.r + ticket.v) * 100 + 99},-</span>
+            <span>{ticket.r + ticket.v} person camp</span>{" "}
+            <span>{(ticket.r + ticket.v) * 100 + 99},-</span>
           </label>
           <input
             value={(ticket.r + ticket.v) * 100 + 99}
@@ -28,7 +52,9 @@ function Optionals({ ticket, addToTicket }) {
             type="checkbox"
             name="two-person"
             id="two-person"
-            onChange={(evt) => addToTicket("tentAmount", Number(evt.target.value))}
+            onChange={(evt) =>
+              addToTicket("tentAmount", Number(evt.target.value))
+            }
           />
           <span className="checkmark"></span>
           {/* <label htmlFor="three-person" className="three-camp">
@@ -41,7 +67,7 @@ function Optionals({ ticket, addToTicket }) {
         <button>NEXT</button>
       </div> */}
       </div>
-    </>
+    </div>
   );
 }
 

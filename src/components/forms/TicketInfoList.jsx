@@ -1,8 +1,11 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { useRef } from "react";
 import TicketInfo from "./TicketInfo";
 
-function TicketInfoList({ ticket, addToTicket, emptyField }) {
+function TicketInfoList({ ticket, addToTicket, emptyField, step }) {
   const sectionEl = useRef(null);
+  const [cghClass, setCghClass] = useState("nextSlide")
 
   function finishedAdding() {
     event.preventDefault();
@@ -27,10 +30,34 @@ function TicketInfoList({ ticket, addToTicket, emptyField }) {
     // 3. addToTicket("info", "voresNyeArray" )
     addToTicket("info", tickets);
   }
+
+useEffect(() => {
+
+  switch (step) {
+    case 1: setCghClass("nextSlide");
+      break;
+    case 2:  setCghClass("");
+      break;
+    case 3:  setCghClass("sendToback1");
+      break;
+    case 4:  setCghClass("sendToback2");
+      break;
+    case 5:  setCghClass("sendToback3");
+      break;
+  }
+},[step])
+
+
+
   return (
-    <section ref={sectionEl}>
+    <section ref={sectionEl} className={`ticketInfoListComp ${cghClass}`}>
+      <div className="container">
       <h3>TICKET INFO</h3>
-      {emptyField ? <p style={{color:"red"}}>Please fill in all of the fields</p> : ""}
+      {emptyField ? (
+        <p style={{ color: "red" }}>Please fill in all of the fields</p>
+      ) : (
+        ""
+      )}
       {[...Array(ticket.r).keys()].map((info, index) => (
         <TicketInfo
           ticket={ticket}
@@ -47,6 +74,7 @@ function TicketInfoList({ ticket, addToTicket, emptyField }) {
           finishedAdding={finishedAdding}
         />
       ))}
+      </div>
     </section>
   );
 }

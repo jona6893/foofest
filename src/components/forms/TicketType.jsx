@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function TicketType({ addToTicket, emptyField }) {
+function TicketType({ addToTicket, emptyField, step }) {
   const [regularTickets, setRegularTickets] = useState("");
   const [vipTickets, setVipTickets] = useState("");
+  const [cghClass, setCghClass] = useState("")
 
   function handleInput(type, evt) {
     const value = evt.target.value;
@@ -25,12 +26,36 @@ function TicketType({ addToTicket, emptyField }) {
     }
   }
 
+useEffect(() => {
+  switch (step) {
+    case 1:
+      setCghClass("");
+      break;
+    case 2:
+      setCghClass("sendToback1");
+      break;
+    case 3:
+      setCghClass("sendToback2");
+      break;
+    case 4:
+      setCghClass("sendToback3");
+      break;
+    case 5:
+      setCghClass("sendToback4");
+      break;
+  }
+}, [step]);
+
   return (
     <>
-      <div className="type-container">
-        <div>
+      <div className={`type-container ticketTypeComp ${cghClass}`}>
+        <div className="container">
           <h3>TICKET TYPE</h3>
-          {emptyField ? <p style={{ color: "red" }}>Please select a ticket type</p> : ""}
+          {emptyField ? (
+            <p style={{ color: "red" }}>Please select a ticket type</p>
+          ) : (
+            ""
+          )}
           <fieldset id="ticket-type">
             <label htmlFor="regular" className="regular-label">
               <span>REGULAR </span>
@@ -67,10 +92,7 @@ function TicketType({ addToTicket, emptyField }) {
               value={vipTickets}
             />
           </fieldset>
-    
         </div>
-
-        
       </div>
     </>
   );

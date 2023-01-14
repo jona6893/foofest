@@ -1,9 +1,35 @@
-export default function CampingArea({ spots, addToTicket, ticket, emptyField }) {
+import { useEffect, useState } from "react";
+
+export default function CampingArea({ spots, addToTicket, ticket, emptyField, step }) {
   //console.log(spots);
+const [cghClass, setCghClass] = useState("nextSlide");
+
+useEffect(() => {
+  switch (step) {
+    case 2:
+      setCghClass("nextSlide");
+      break;
+    case 3:
+      setCghClass("");
+      break;
+    case 4:
+      setCghClass("sendToback2");
+      break;
+    case 5:
+      setCghClass("sendToback3");
+      break;
+  }
+}, [step]);
+
+
   return (
-    <>
+    <div className={`campingAreaComp ${cghClass}`}>
       <h3>CAMPING AREA</h3>
-      {emptyField ? <p style={{ color: "red" }}>Please pick one of the option below</p> : ""}
+      {emptyField ? (
+        <p style={{ color: "red" }}>Please pick one of the option below</p>
+      ) : (
+        ""
+      )}
       <fieldset id="camping-area" className="scene-names">
         <div className="campContainer">
           <label htmlFor="no-camping">No camping</label>
@@ -42,6 +68,6 @@ export default function CampingArea({ spots, addToTicket, ticket, emptyField }) 
         <button>BACK</button>
         <button>NEXT</button>
       </div> */}
-    </>
+    </div>
   );
 }

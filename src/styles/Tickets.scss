@@ -3,6 +3,7 @@
 //mobile version
 #ticket-section {
   width: 100%;
+  height: 100%;
   //padding: 2rem;
 
   h3 {
@@ -63,7 +64,7 @@
     display: grid;
     justify-content: center;
     padding: 1rem;
-    min-height: 80vh;
+    max-height: 90vh;
     max-width: 480px;
     margin-inline: auto;
     label {
@@ -295,7 +296,7 @@
     #creditcard-info {
       display: grid;
       grid-template-rows: repeat(3, calc(72px + 1rem));
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 125px 1fr;
       gap: 1rem;
       margin-bottom: 40px;
 
@@ -362,6 +363,9 @@
         #expire-month {
           display: block;
           border: 0;
+        }
+        input{
+          text-align: center;
         }
       }
       button {
@@ -516,7 +520,7 @@
       display: flex;
       padding: 1rem;
       margin: auto;
-      min-height: 80vh;
+      max-height: 90vh;
       width: 480px;
       flex-direction: column;
       justify-content: space-between;
@@ -543,7 +547,7 @@
     }
 
     .steps-content {
-      margin-top: calc(40px + 3vh);
+      //margin-top: calc(40px + 3vh);
     }
 
     .concert-img-wrapper {

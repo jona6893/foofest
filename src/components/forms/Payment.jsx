@@ -1,10 +1,11 @@
 import Basket from "./Basket";
 import CreditCardInfo from "./CreditCardInfo";
 import OrderComplete from "./OrderComplete";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-function Payment({ ticket, addToTicket, emptyField, payComplet }) {
+function Payment({ ticket, addToTicket, emptyField, payComplet, step }) {
   const sectionEl = useRef(null);
+  const [cghClass, setCghClass] = useState("nextSlide");
   function finishedAdding() {
     event.preventDefault();
 
@@ -30,8 +31,19 @@ function Payment({ ticket, addToTicket, emptyField, payComplet }) {
     addToTicket("payment", creditCard);
   }
 
+  useEffect(() => {
+    switch (step) {
+      case 4:
+        setCghClass("nextSlide");
+        break;
+      case 5:
+        setCghClass("");
+        break;
+    }
+  }, [step]);
+
   return (
-    <>
+    <div className={`paymentComp ${cghClass}`}>
       {/*   <Basket ticket={ticket} /> */}
       {payComplet ? (
         <>
@@ -41,10 +53,14 @@ function Payment({ ticket, addToTicket, emptyField, payComplet }) {
       ) : (
         <section ref={sectionEl}>
           <Basket ticket={ticket} />
-          <CreditCardInfo finishedAdding={finishedAdding} emptyField={emptyField} ticket={ticket} />
+          <CreditCardInfo
+            finishedAdding={finishedAdding}
+            emptyField={emptyField}
+            ticket={ticket}
+          />
         </section>
       )}
-    </>
+    </div>
   );
 }
 

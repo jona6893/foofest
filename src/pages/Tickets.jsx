@@ -1,7 +1,8 @@
-import { useState, useEffect, } from "react";
+import { useState, useEffect } from "react";
 import { Button, message, Steps } from "antd";
 import TicketType from "../components/forms/TicketType";
 import "../styles/Tickets.scss";
+import "../styles/ticketFlowAni.scss";
 import CampingArea from "../components/forms/CampingArea";
 import Optionals from "../components/forms/Optionals";
 import Payment from "../components/forms/Payment";
@@ -22,7 +23,6 @@ function Tickets() {
     tentAmount: 0,
   });
   // The current step to which the Ant Design Step counter is on
-  const [current, setCurrent] = useState(0);
   // Validate, if a field is not filled in. It will display a red error message
   const [emptyField, setEmptyField] = useState(false);
   // check if the payment has been forfilled, if so display thank you note
@@ -36,9 +36,11 @@ function Tickets() {
   // Check if timer needs to start
   const [Timer, setTimer] = useState(false);
   //refresh page
-   const [counterTime, setCounterTime] = useState(null);
-  // Timer length
-  //const [oneHour, setOneHour] = useState();
+  const [counterTime, setCounterTime] = useState(null);
+  // step counter
+  const [step, setStep] = useState(1);
+  //const [TILClass, setTILClass] = useState("nextSlide");
+
   /* 
     URL:
     "http://localhost:8080/available-spots"
@@ -80,7 +82,6 @@ function Tickets() {
     setCounterTime(Date.now() + 300000);
     setTimer(true);
     //console.log(response);
-   
   }
   // FULL RESERVATION
   async function fullReservation() {
@@ -102,13 +103,150 @@ function Tickets() {
     setSupaData(response);
     //console.log(response);
   }
- 
 
+  const renderer = ({ minutes, seconds }) => {
+    return (
+      <span className="ticket-timer">
+        {zeroPad(minutes)}:{zeroPad(seconds)}
+      </span>
+    );
+  };
 
+  const steps = (e) => {
+    const btn = e.target.className;
+    if (btn == "prevBtn") {
+      if (step >= 2 && step <= 5) {
+        setStep((old) => old -1)
+      }
+    } else if (btn == "nextBtn") {
+      /* if (step >=1  && step <= 4) {
+        
+      } */
+      console.log(step)
+      if(step == 1) {
+        setPayComplet(false);
+        if (ticket.r === 0 && ticket.v === 0) {
+          setEmptyField(true);
+        } else {
+          setEmptyField(false);
+          setStep((old) => old + 1);
+        }
+      } else if(step === 2) {
+        console.log(ticket.info);
+        if (
+          ticket.info.length <= 0 ||
+          ticket.info[0].birthday == "" ||
+          ticket.info[0].email == "" ||
+          ticket.info[0].fullname == ""
+        ) {
+          console.log("pdofigs");
+          setEmptyField(true);
+        } else {
+          setEmptyField(false);
+          setStep((old) => old + 1);
+        }
+      } else if(step === 3){
+        if (ticket.campingArea === "" || ticket.campingArea === "none") {
+          setStep((old) => old + 2);
+        } else {
+            reserveSpot();
+            setStep((old) => old + 1);
+        }
+      } else if(step === 4){
+        setStep((old) => old + 1);
+      } else{
+        if (ticket.payment === undefined) {
+          setEmptyField(true);
+          //console.log("credit info not there");
+        } else if (ticket.payment[0].number.toString().length < 16) {
+          setEmptyField(true);
+          //console.log("please fill out the creditnumber");
+        } else if (ticket.payment[0].day.toString().length < 2) {
+          setEmptyField(true);
+          //console.log("month");
+        } else if (ticket.payment[0].month.toString().length < 2) {
+          setEmptyField(true);
+          //console.log("year");
+        } else if (ticket.payment[0].cvc.toString().length < 3) {
+          setEmptyField(true);
+          //console.log("cvc");
+        } else {
+          setEmptyField(false);
+          setPayComplet(true);
+          fullReservation();
+          postToSupabase();
+          setTimer(false);
+          message.success("Processing complete!");
+        }
+      }
+    }
+  };
 
+  return (
+    <section id="ticket-section">
+      
+      <form action="" id="tickets">
+        {Timer ? (
+        <CD
+          onComplete={() => {
+            if (Timer === true) {
+              window.location.reload(false);
+            }
+          }}
+          date={counterTime}
+          renderer={renderer}
+        />
+      ) : (
+        ""
+      )}
+        <div className="steps-content">
+          <TicketType
+            addToTicket={addToTicket}
+            emptyField={emptyField}
+            step={step}
+          />
+          <TicketInfoList
+            step={step}
+            ticket={ticket}
+            addToTicket={addToTicket}
+            emptyField={emptyField}
+          />
+          <CampingArea
+            spots={spots}
+            addToTicket={addToTicket}
+            ticket={ticket}
+            emptyField={emptyField}
+            step={step}
+          />
+          <Optionals addToTicket={addToTicket} ticket={ticket} step={step} />
+          <Payment
+            payComplet={payComplet}
+            ticket={ticket}
+            addToTicket={addToTicket}
+            emptyField={emptyField}
+            step={step}
+          />
+          
+        </div>{!payComplet && <div className="formBtns">
+            <span className="prevBtn" onClick={(e) => steps(e)}>
+              Previous
+            </span>
+            <span className="nextBtn" onClick={(e) => steps(e)}>
+              Next
+            </span>
+          </div>}
+      </form>
+      <div className="concert-img-wrapper">
+        <div className="concert-img"></div>
+      </div>
+    </section>
+  );
+}
 
-  // Progress tracker from Ant Design
-  const steps = [
+export default Tickets;
+
+// Progress tracker from Ant Design
+/* const steps = [
     {
       title: "",
       content: <TicketType addToTicket={addToTicket} emptyField={emptyField} />,
@@ -146,21 +284,9 @@ function Tickets() {
   const skipOptions = () => {
     setCurrent(current + 2);
   
-  };
+  }; */
 
-  const renderer = ({minutes, seconds}) => {
-    return (
-      <span className="ticket-timer">
-        {zeroPad(minutes)}:{zeroPad(seconds)}
-      </span>
-    );
-  }
-  return (
-    <section id="ticket-section">
-      <form action="" id="tickets">
-        <Steps className={payComplet ? "hidden" : null} current={current} items={items} />
-        <div className="steps-content">
-          {Timer ? (
+/*  {Timer ? (
             <CD 
             onComplete={()=> {  if (Timer === true) {
               window.location.reload(false);
@@ -169,10 +295,7 @@ function Tickets() {
             renderer={renderer}
         
             />
-          ) : (
-            ""
-          )}
-          {steps[current].content}
+          ) : ("")}
         </div>
         <div className={!payComplet ? (current > 0 ? "steps-action two-button" : "steps-action one-button") : "hidden"}>
           {current > 0 && (
@@ -290,19 +413,9 @@ function Tickets() {
                     setTimer(false);
                     message.success("Processing complete!");
                   }
-                } /* message.success("Processing complete!") */
+                }
               }
             >
               DONE
             </Button>
-          )}
-        </div>
-      </form>
-      <div className="concert-img-wrapper">
-        <div className="concert-img"></div>
-      </div>
-    </section>
-  );
-}
-
-export default Tickets;
+          )} */

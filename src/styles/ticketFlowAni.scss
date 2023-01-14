@@ -1,0 +1,132 @@
+@use "./utils/variables" as v;
+
+#tickets {
+  width: 100%;
+  height: 90vh;
+
+  .steps-content {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    //margin-top: 0 !important;
+    display: grid;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .formBtns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .nextBtn,
+    .prevBtn {
+      background-color: transparent;
+      border: 2px solid v.$color-purple-normal;
+      height: max-content;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      
+      &:hover {
+        border: 2px solid v.$color-purple-light;
+        color: v.$color-white-normal;
+        background-color: v.$color-purple-light;
+      }
+    }
+  }
+}
+
+.ticketTypeComp {
+  //position: absolute;
+  transition: 0.3s;
+  z-index: 0;
+  grid-area: 1/1;
+  background: rgba(14, 8, 38, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  .container {
+  }
+}
+.ticketInfoListComp {
+  //position: absolute;
+  overflow: scroll;
+  transition: 0.3s;
+  z-index: 1;
+  grid-area: 1/1;
+  background: rgba(14, 8, 38, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* .container{
+    background:#191333;
+    padding: 15px;
+    border-radius: 15px;
+  } */
+}
+.campingAreaComp {
+  //position: absolute;
+  transition: 0.3s;
+  z-index: 2;
+  grid-area: 1/1;
+  background: rgba(14, 8, 38, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+.optionalsComp {
+  //position: absolute;
+  transition: 0.3s;
+  z-index: 3;
+  grid-area: 1/1;
+  background: rgba(14, 8, 38, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.paymentComp {
+  //position: absolute;
+  transition: 0.3s;
+  z-index: 4;
+  grid-area: 1/1;
+  background: rgba(14, 8, 38, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.sendToback1 {
+  transform: scale(0.8);
+  filter: opacity(0.8);
+  filter: blur(3px);
+
+  pointer-events: none;
+}
+.sendToback2 {
+  transform: scale(0.7);
+  filter: opacity(0.7);
+  filter: blur(3px);
+  pointer-events: none;
+}
+.sendToback3 {
+  transform: scale(0.6);
+  filter: opacity(0.6);
+  filter: blur(3px);
+  pointer-events: none;
+}
+.sendToback4 {
+  transform: scale(0.5);
+  transform: translate();
+  filter: opacity(0.5);
+  filter: blur(3px);
+  pointer-events: none;
+}
+.currentSlide {
+}
+.nextSlide {
+  transform: translateX(100%);
+}
