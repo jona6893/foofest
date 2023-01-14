@@ -3,7 +3,7 @@ import CreditCardInfo from "./CreditCardInfo";
 import OrderComplete from "./OrderComplete";
 import { useEffect, useRef, useState } from "react";
 
-function Payment({ ticket, addToTicket, emptyField, payComplet, step }) {
+function Payment({ ticket, addToTicket, emptyField, payComplet, step, steps }) {
   const sectionEl = useRef(null);
   const [cghClass, setCghClass] = useState("nextSlide");
   function finishedAdding() {
@@ -58,7 +58,18 @@ function Payment({ ticket, addToTicket, emptyField, payComplet, step }) {
             emptyField={emptyField}
             ticket={ticket}
           />
+          {!payComplet && (
+          <div className="formBtns">
+            <span className="prevBtn" onClick={(e) => steps(e)}>
+              Previous
+            </span>
+            <span className="nextBtn" onClick={(e) => steps(e)}>
+              Next
+            </span>
+          </div>
+        )}
         </section>
+        
       )}
     </div>
   );

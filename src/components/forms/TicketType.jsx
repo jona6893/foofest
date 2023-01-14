@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function TicketType({ addToTicket, emptyField, step }) {
+function TicketType({ addToTicket, emptyField, step, steps }) {
   const [regularTickets, setRegularTickets] = useState("");
   const [vipTickets, setVipTickets] = useState("");
   const [cghClass, setCghClass] = useState("")
@@ -93,6 +93,16 @@ useEffect(() => {
             />
           </fieldset>
         </div>
+        
+          <div className="formBtns">
+            <span className="prevBtn" onClick={(e) => steps(e)}>
+              Previous
+            </span>
+            <span className="nextBtn" onClick={(e) => steps(e)}>
+              Next
+            </span>
+          </div>
+    
       </div>
     </>
   );

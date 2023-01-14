@@ -184,32 +184,33 @@ function Tickets() {
 
   return (
     <section id="ticket-section">
-      
       <form action="" id="tickets">
         {Timer ? (
-        <CD
-          onComplete={() => {
-            if (Timer === true) {
-              window.location.reload(false);
-            }
-          }}
-          date={counterTime}
-          renderer={renderer}
-        />
-      ) : (
-        ""
-      )}
+          <CD
+            onComplete={() => {
+              if (Timer === true) {
+                window.location.reload(false);
+              }
+            }}
+            date={counterTime}
+            renderer={renderer}
+          />
+        ) : (
+          ""
+        )}
         <div className="steps-content">
           <TicketType
             addToTicket={addToTicket}
             emptyField={emptyField}
             step={step}
+            steps={steps}
           />
           <TicketInfoList
             step={step}
             ticket={ticket}
             addToTicket={addToTicket}
             emptyField={emptyField}
+            steps={steps}
           />
           <CampingArea
             spots={spots}
@@ -217,24 +218,28 @@ function Tickets() {
             ticket={ticket}
             emptyField={emptyField}
             step={step}
+            steps={steps}
           />
-          <Optionals addToTicket={addToTicket} ticket={ticket} step={step} />
+          <Optionals addToTicket={addToTicket} ticket={ticket} step={step} steps={steps} />
           <Payment
             payComplet={payComplet}
             ticket={ticket}
             addToTicket={addToTicket}
             emptyField={emptyField}
             step={step}
+            steps={steps}
           />
-          
-        </div>{!payComplet && <div className="formBtns">
+        </div>
+        {/* {!payComplet && (
+          <div className="formBtns">
             <span className="prevBtn" onClick={(e) => steps(e)}>
               Previous
             </span>
             <span className="nextBtn" onClick={(e) => steps(e)}>
               Next
             </span>
-          </div>}
+          </div>
+        )} */}
       </form>
       <div className="concert-img-wrapper">
         <div className="concert-img"></div>

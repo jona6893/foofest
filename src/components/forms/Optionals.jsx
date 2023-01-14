@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Optionals({ ticket, addToTicket, step }) {
+function Optionals({ ticket, addToTicket, step, steps }) {
 
 const [cghClass, setCghClass] = useState("nextSlide");
 
@@ -61,6 +61,14 @@ useEffect(() => {
           <span>3 person camp</span> <span> 399,-</span>
         </label>
         <input type="checkbox" name="three-person" id="green-campingthree-person" /> */}
+          <div className="formBtns">
+            <span className="prevBtn" onClick={(e) => steps(e)}>
+              Previous
+            </span>
+            <span className="nextBtn" onClick={(e) => steps(e)}>
+              Next
+            </span>
+          </div>
         </fieldset>
         {/*  <div className="button-container">
         <button>BACK</button>

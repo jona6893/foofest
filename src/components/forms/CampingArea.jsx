@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CampingArea({ spots, addToTicket, ticket, emptyField, step }) {
+export default function CampingArea({ spots, addToTicket, ticket, emptyField, step, steps }) {
   //console.log(spots);
 const [cghClass, setCghClass] = useState("nextSlide");
 
@@ -63,7 +63,16 @@ useEffect(() => {
             />
           </div>
         ))}
+        <div className="formBtns">
+          <span className="prevBtn" onClick={(e) => steps(e)}>
+            Previous
+          </span>
+          <span className="nextBtn" onClick={(e) => steps(e)}>
+            Next
+          </span>
+        </div>
       </fieldset>
+
       {/*       <div className="button-container">
         <button>BACK</button>
         <button>NEXT</button>

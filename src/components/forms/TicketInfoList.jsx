@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import TicketInfo from "./TicketInfo";
 
-function TicketInfoList({ ticket, addToTicket, emptyField, step }) {
+function TicketInfoList({ ticket, addToTicket, emptyField, step, steps }) {
   const sectionEl = useRef(null);
   const [cghClass, setCghClass] = useState("nextSlide")
 
@@ -52,29 +52,39 @@ useEffect(() => {
   return (
     <section ref={sectionEl} className={`ticketInfoListComp ${cghClass}`}>
       <div className="container">
-      <h3>TICKET INFO</h3>
-      {emptyField ? (
-        <p style={{ color: "red" }}>Please fill in all of the fields</p>
-      ) : (
-        ""
-      )}
-      {[...Array(ticket.r).keys()].map((info, index) => (
-        <TicketInfo
-          ticket={ticket}
-          type={"REGULAR"}
-          key={index}
-          finishedAdding={finishedAdding}
-        />
-      ))}
-      {[...Array(ticket.v).keys()].map((info, index) => (
-        <TicketInfo
-          ticket={ticket}
-          type={"VIP"}
-          key={index}
-          finishedAdding={finishedAdding}
-        />
-      ))}
+        <h3>TICKET INFO</h3>
+        {emptyField ? (
+          <p style={{ color: "red" }}>Please fill in all of the fields</p>
+        ) : (
+          ""
+        )}
+        {[...Array(ticket.r).keys()].map((info, index) => (
+          <TicketInfo
+            ticket={ticket}
+            type={"REGULAR"}
+            key={index}
+            finishedAdding={finishedAdding}
+          />
+        ))}
+        {[...Array(ticket.v).keys()].map((info, index) => (
+          <TicketInfo
+            ticket={ticket}
+            type={"VIP"}
+            key={index}
+            finishedAdding={finishedAdding}
+          />
+        ))}
       </div>
+    
+        <div className="formBtns">
+          <span className="prevBtn" onClick={(e) => steps(e)}>
+            Previous
+          </span>
+          <span className="nextBtn" onClick={(e) => steps(e)}>
+            Next
+          </span>
+        </div>
+      
     </section>
   );
 }
