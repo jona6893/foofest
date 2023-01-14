@@ -93,11 +93,7 @@ useEffect(() => {
               inputMode="numeric"
               placeholder="0"
               value={vipTickets}
-            />
-          </fieldset>
-        </div>
-        
-          <div className="formBtns">
+            /><div className="formBtns">
             <span className="prevBtn" onClick={(e) => steps(e)}>
               Previous
             </span>
@@ -105,6 +101,10 @@ useEffect(() => {
               Next
             </span>
           </div>
+          </fieldset>
+        </div>
+        
+          
     
       </div>
     </>
