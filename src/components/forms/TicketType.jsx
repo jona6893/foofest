@@ -32,7 +32,7 @@ useEffect(() => {
   switch (step) {
     case 1:
       setCghClass("");
-      ref.current?.scrollIntoView({ behavior: "smooth" });
+      //ref.current?.scrollIntoView({ behavior: "smooth" });
       break;
     case 2:
       setCghClass("sendToback1");
@@ -94,9 +94,6 @@ useEffect(() => {
               placeholder="0"
               value={vipTickets}
             /><div className="formBtns">
-            <span className="prevBtn" onClick={(e) => steps(e)}>
-              Previous
-            </span>
             <span className="nextBtn" onClick={(e) => steps(e)}>
               Next
             </span>

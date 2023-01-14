@@ -146,14 +146,16 @@
       label {
         /*min-width: 200px;*/
         width: 100%;
+  
       }
-      /*input {
-        width: 50px;
-      }*/
+      input {
+        width: 65px;
+      }
       .regular-label,
       .vip-label {
         display: flex;
         justify-content: space-between;
+        align-items: center;
       }
     }
 
@@ -192,7 +194,7 @@
       //grid-template-columns: 1.5fr 0.5fr 0.5fr;
       gap: 1rem;
       input {
-        width: 50px;
+        //width: 50px;
         accent-color: #9400f6;
       }
       .avail-box {
@@ -219,6 +221,8 @@
         label,
         input {
           cursor: pointer;
+          width: 35 !important;
+      //margin: auto;
         }
       }
     }
@@ -227,6 +231,9 @@
       display: grid;
       grid-template-columns: 1.5fr 0.35fr;
       gap: 0.5rem;
+      label{
+        align-items: center;
+      }
       #green-camping {
         min-height: 0;
       }
@@ -248,6 +255,7 @@
         color: white;
         background-color: transparent;
         color: v.$color-white-dark;
+        
 
         span {
           color: red;
