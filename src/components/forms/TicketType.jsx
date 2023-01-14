@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function TicketType({ addToTicket, emptyField, step, steps }) {
   const [regularTickets, setRegularTickets] = useState("");
   const [vipTickets, setVipTickets] = useState("");
   const [cghClass, setCghClass] = useState("")
+  const ref = useRef();
 
   function handleInput(type, evt) {
     const value = evt.target.value;
     const regex = /^[\d]+$/g;
+    
 
     switch (type) {
       case "regular":
@@ -30,6 +32,7 @@ useEffect(() => {
   switch (step) {
     case 1:
       setCghClass("");
+      ref.current?.scrollIntoView({ behavior: "smooth" });
       break;
     case 2:
       setCghClass("sendToback1");
@@ -48,7 +51,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className={`type-container ticketTypeComp ${cghClass}`}>
+      <div ref={ref} className={`type-container ticketTypeComp ${cghClass}`}>
         <div className="container">
           <h3>TICKET TYPE</h3>
           {emptyField ? (
