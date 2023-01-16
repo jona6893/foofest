@@ -1,5 +1,5 @@
 import { useState } from "react";
-function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
+function CreditCardInfo({ finishedAdding, emptyField, ticket, step, steps }) {
   const [txt, setTxt] = useState("");
   const [creidtNr, setCreidtNr] = useState("");
   const [creidtNrSpan, setCreidtNrSpan] = useState(false);
@@ -105,7 +105,9 @@ function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
             onBlur={handleBlur}
             value={txt}
           />
-          {emptyField ? <span className="field-required">Field Required</span> : null}
+          {emptyField ? (
+            <span className="field-required">Field Required</span>
+          ) : null}
         </label>
         <label htmlFor="cardnumber" className="cardnumber">
           Cardnumber
@@ -127,12 +129,18 @@ function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
             onBlur={handleBlur}
             value={creidtNr}
           />
-          {creidtNrSpan ? <span className="field-required">Field Required</span> : null}
+          {creidtNrSpan ? (
+            <span className="field-required">Field Required</span>
+          ) : null}
         </label>
 
         <label htmlFor="expires" className="expires">
           Expire
-          <div className={focusing ? "expire-container focus-visible" : "expire-container"}>
+          <div
+            className={
+              focusing ? "expire-container focus-visible" : "expire-container"
+            }
+          >
             <input
               type="text"
               name="expires"
@@ -175,7 +183,9 @@ function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
               onFocus={() => setFocusing(true)}
             />
           </div>
-          {monthSpan || yearSpan ? <span className="field-required">Field Required</span> : null}
+          {monthSpan || yearSpan ? (
+            <span className="field-required">Field Required</span>
+          ) : null}
         </label>
 
         <label htmlFor="cvc" className="cvc">
@@ -198,8 +208,18 @@ function CreditCardInfo({ finishedAdding, emptyField, ticket }) {
             onBlur={handleBlur}
             value={cvc}
           />
-          {cvcSpan ? <span className="field-required">Field Required</span> : null}
+          {cvcSpan ? (
+            <span className="field-required">Field Required</span>
+          ) : null}
         </label>
+        <div className="formBtns">
+          <span className="prevBtn" onClick={(e) => steps(e)}>
+            Previous
+          </span>
+          <span className="nextBtn" onClick={(e) => steps(e)}>
+            Done
+          </span>
+        </div>
       </fieldset>
       {/*  <button>COMPLETE PAYMENT</button> */}
     </>

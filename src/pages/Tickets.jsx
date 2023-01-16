@@ -187,21 +187,23 @@ function Tickets() {
   return (
     <section id="ticket-section">
       <form action="" id="tickets">
+        <div className="stepNtime"> 
         {Timer ? (
           <CD
-            onComplete={() => {
-              if (Timer === true) {
-                window.location.reload(false);
-              }
-            }}
-            date={counterTime}
-            renderer={renderer}
+          onComplete={() => {
+            if (Timer === true) {
+              window.location.reload(false);
+            }
+          }}
+          date={counterTime}
+          renderer={renderer}
           />
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+            )}
+            <StepTracker step={step}/></div>
         <div className="steps-content">
-          <StepTracker step={step}/>
+          
           <TicketType
             addToTicket={addToTicket}
             emptyField={emptyField}
@@ -238,16 +240,6 @@ function Tickets() {
             steps={steps}
           />
         </div>
-        {/* {!payComplet && (
-          <div className="formBtns">
-            <span className="prevBtn" onClick={(e) => steps(e)}>
-              Previous
-            </span>
-            <span className="nextBtn" onClick={(e) => steps(e)}>
-              Next
-            </span>
-          </div>
-        )} */}
       </form>
       <div className="concert-img-wrapper">
         <div className="concert-img"></div>

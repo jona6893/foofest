@@ -51,23 +51,25 @@ function Payment({ ticket, addToTicket, emptyField, payComplet, step, steps }) {
           {/* <Basket ticket={ticket} /> */}
         </>
       ) : (
-        <section ref={sectionEl}>
+        <section ref={sectionEl} className="basketCreditcard">
           <Basket ticket={ticket} />
           <CreditCardInfo
             finishedAdding={finishedAdding}
             emptyField={emptyField}
             ticket={ticket}
+            step={step}
+            steps={steps}
           />
-          {!payComplet && (
+          {/* {!payComplet && (
           <div className="formBtns">
             <span className="prevBtn" onClick={(e) => steps(e)}>
               Previous
             </span>
             <span className="nextBtn" onClick={(e) => steps(e)}>
-              Next
+              Done
             </span>
           </div>
-        )}
+        )} */}
         </section>
         
       )}
