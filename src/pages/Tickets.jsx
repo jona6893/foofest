@@ -9,6 +9,7 @@ import Payment from "../components/forms/Payment";
 import TicketInfoList from "../components/forms/TicketInfoList";
 import CD, { zeroPad } from "react-countdown";
 import { insertOrder, reserve, postData } from "../components/forms/db.js";
+import StepTracker from "../components/forms/StepTracker";
 
 function Tickets() {
   // Arrray of availabel spots at the festival
@@ -40,6 +41,7 @@ function Tickets() {
   // step counter
   const [step, setStep] = useState(1);
   //const [TILClass, setTILClass] = useState("nextSlide");
+  const [stepTracker, setStepTracker] = useState("")
 
   /* 
     URL:
@@ -199,13 +201,7 @@ function Tickets() {
           ""
         )}
         <div className="steps-content">
-          <div className="steptracks">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-          </div>
+          <StepTracker step={step}/>
           <TicketType
             addToTicket={addToTicket}
             emptyField={emptyField}
@@ -227,7 +223,12 @@ function Tickets() {
             step={step}
             steps={steps}
           />
-          <Optionals addToTicket={addToTicket} ticket={ticket} step={step} steps={steps} />
+          <Optionals
+            addToTicket={addToTicket}
+            ticket={ticket}
+            step={step}
+            steps={steps}
+          />
           <Payment
             payComplet={payComplet}
             ticket={ticket}
