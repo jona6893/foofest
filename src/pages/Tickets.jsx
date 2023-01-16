@@ -121,10 +121,6 @@ function Tickets() {
         setStep((old) => old -1)
       }
     } else if (btn == "nextBtn") {
-      /* if (step >=1  && step <= 4) {
-        
-      } */
-      console.log(step)
       if(step == 1) {
         setPayComplet(false);
         if (ticket.r === 0 && ticket.v === 0) {

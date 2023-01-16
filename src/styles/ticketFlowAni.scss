@@ -38,6 +38,9 @@
         background-color: v.$color-purple-light;
       }
     }
+    .nextBtn{
+      background: #9400f6;
+    }
   }
 }
 
@@ -137,11 +140,15 @@
   flex-direction: column;
   justify-content: center;
   transition: 0.3s;
+  overflow: scroll;
   z-index: 4;
   grid-area: 2/1;
   background: rgba(14, 8, 38, 0.8);
   padding: 20px;
   border-radius: 10px;
+  &::-webkit-scrollbar {
+      display: none;
+    }
   .formBtns{
     width: 100%;
     display: flex;
@@ -153,12 +160,7 @@
     //margin-top: 16px;
     border-radius: 5px;
   } 
-  .basketCreditcard{
-    overflow: scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+ 
 }
 
 
@@ -185,6 +187,7 @@
   display: flex;
   justify-content: space-evenly;
   padding-block: 10px;
+  margin-top: 30px;
 }
 
 
@@ -195,7 +198,6 @@
   transform: scale(0.8);
   filter: opacity(0.8);
   filter: blur(3px);
-
   pointer-events: none;
 }
 .sendToback2 {

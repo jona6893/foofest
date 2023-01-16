@@ -32,7 +32,6 @@ useEffect(() => {
   switch (step) {
     case 1:
       setCghClass("");
-      //ref.current?.scrollIntoView({ behavior: "smooth" });
       break;
     case 2:
       setCghClass("sendToback1");
